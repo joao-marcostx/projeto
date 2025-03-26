@@ -1,38 +1,81 @@
+/* Reset básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 body {
     display: flex;
     justify-content: center;
+    align-items: center;
     flex-direction: column;
-    background-color: #fafafa; /* Fundo escuro */
-    color: rgb(0, 0, 0);
+    height: 100vh;
+    background-color: #f4f4f4;
+    color: #333;
     font-family: Arial, sans-serif;
 }
 
-.grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Máximo 3 colunas */
-    gap: 15px;
-    justify-content: center;
-    padding: 20px;
-}
-
-.card {
-    width: 15rem;
-    height: 180px;
-    margin: 10px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-    transition: 0.3s;
-    background-color: #222324;
-    color: white;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
-
+/* Contêiner principal */
 .container {
-    margin: auto;
+    width: 90%;
+    max-width: 500px;
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
 }
 
-.bd {
+/* Entrada de arquivo */
+input[type="file"] {
+    width: 100%;
     padding: 10px;
+    margin-top: 10px;
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* Campo de texto */
+input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    border: 2px solid #ddd;
+    border-radius: 5px;
+}
+
+/* Botão de envio */
+button {
+    width: 100%;
+    padding: 10px;
+    margin-top: 15px;
+    background-color: #007BFF;
+    border: none;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+/* Contêiner da pré-visualização */
+.preview-container {
+    margin-top: 15px;
+}
+
+/* Tamanho padrão para todas as imagens */
+.preview-container img {
+    width: 100%; /* Garante que a imagem ocupe toda a largura disponível */
+    max-width: 300px; /* Define um tamanho máximo para não ficar muito grande */
+    height: 200px; /* Altura fixa para manter o padrão */
+    object-fit: cover; /* Mantém a proporção sem distorcer */
+    border-radius: 5px;
+    border: 2px solid #ddd;
 }

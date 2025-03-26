@@ -19,17 +19,15 @@ const Card = () => {
 
     const selectedFile = files[0];
     setFile(selectedFile);
-    setPreview(URL.createObjectURL(selectedFile)); // Pré-visualização da imagem
+    setPreview(URL.createObjectURL(selectedFile));
   };
 
-  // Envia a imagem para o backend
   const handleUpload = async () => {
     if (!file || !alternativo) {
       alert("Todos os campos precisam ser preenchidos");
       return;
     }
 
-    // Debug: Verificar se os valores estão corretos
     console.log("Arquivo selecionado:", file);
     console.log("Descrição:", alternativo);
 
@@ -37,7 +35,6 @@ const Card = () => {
     formData.append("foto", file);
     formData.append("alternativo", alternativo);
 
-    // Debug: Verificar o conteúdo do FormData
     for (let pair of formData.entries()) {
       console.log(pair[0], pair[1]);
     }
@@ -45,16 +42,19 @@ const Card = () => {
     try {
       setLoading(true);
 
-      const response = await axios.post('http://localhost:3010/foto', formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      });
+      const response = await axios.post(
+        "http://localhost:3010/foto",
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
 
       console.log("Resposta do servidor:", response.data);
       alert("Imagem enviada com sucesso!");
 
-      // Limpar campos após o envio
       setFile(null);
       setAlternativo("");
       setPreview(null);
@@ -67,25 +67,42 @@ const Card = () => {
   };
 
   return (
-    <div className={style.bd}>
-      <input type="file" accept="image/*" onChange={handleFileChange} />
+    <div className={style.container}>
+      <div className={style.card}>
+        <h2 className={style.title}>Envio de Arquivos</h2>
 
-      <input
-        type="text"
-        placeholder="Digite uma descrição"
-        value={alternativo}
-        onChange={(e) => setAlternativo(e.target.value)}
-      />
+        <input
+          type="file"
+          accept="image/*"
+          className={style.inputFile}
+          onChange={handleFileChange}
+        />
 
-      {preview && (
-        <div className={style.card}>
-          <img src={preview} alt="Preview" style={{ width: "100%" }} />
-        </div>
-      )}
+        <input
+          type="text"
+          placeholder="Digite uma descrição"
+          value={alternativo}
+          className={style.inputText}
+          onChange={(e) => setAlternativo(e.target.value)}
+        />
 
-      <button type="submit" className={style.btn} onClick={handleUpload} disabled={loading}>
-        {loading ? "Enviando..." : "Enviar"}
-      </button>
+        {preview && (
+          <div className={style.previewContainer}>
+            <img src={preview} alt="Preview" className={style.previewImage} />
+          </div>
+        )}
+
+        <button
+          type="submit"
+          className={style.btn}
+          onClick={handleUpload}
+          disabled={loading}
+        >
+          {loading ? "Enviando..." : "Enviar"}
+        </button>
+
+        
+      </div>
     </div>
   );
 };
