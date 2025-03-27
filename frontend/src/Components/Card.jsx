@@ -66,6 +66,8 @@ const Card = () => {
     }
   };
 
+  
+
   return (
     <div className={style.container}>
       <div className={style.card}>
